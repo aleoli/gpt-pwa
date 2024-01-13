@@ -50,7 +50,7 @@ function TopBar() {
 
   const onInstallClick = () => {
     if (isMobileSafari()) {
-      navigate('/install-pwa-safari');
+      navigate(process.env.PUBLIC_URL + '/install-pwa-safari');
     } else {
       promptToInstall();
     }
@@ -63,30 +63,21 @@ function TopBar() {
   }, [prompt]);
 
   React.useEffect(() => {
-    switch (location.pathname) {
-      case '/':
-        topBarCtx?.setTitle('Chat');
-        topBarCtx?.setShowClearButton(true);
-        break;
-      case '/chat':
-        topBarCtx?.setTitle('Chat');
-        topBarCtx?.setShowClearButton(true);
-        break;
-      case '/image':
-        topBarCtx?.setTitle('Image Generation');
-        topBarCtx?.setShowClearButton(true);
-        break;
-      case '/settings':
-        topBarCtx?.setTitle('Settings');
-        topBarCtx?.setShowClearButton(false);
-        break;
-      case '/install-pwa-safari':
-        topBarCtx?.setTitle('Install');
-        topBarCtx?.setShowClearButton(false);
-        break;
-      default:
-        topBarCtx?.setTitle('GPT PWA');
-        break;
+    if (location.pathname.includes('chat')) {
+      topBarCtx?.setTitle('Chat');
+      topBarCtx?.setShowClearButton(true);
+    } else if (location.pathname.includes('image')) {
+      topBarCtx?.setTitle('Image Generation');
+      topBarCtx?.setShowClearButton(true);
+    } else if (location.pathname.includes('settings')) {
+      topBarCtx?.setTitle('Settings');
+      topBarCtx?.setShowClearButton(false);
+    } else if (location.pathname.includes('install-pwa-safari')) {
+      topBarCtx?.setTitle('Install');
+      topBarCtx?.setShowClearButton(false);
+    } else {
+      topBarCtx?.setTitle('Chat');
+      topBarCtx?.setShowClearButton(true);
     }
   }, [location, topBarCtx]);
 
@@ -117,7 +108,7 @@ function TopBar() {
             color="inherit"
             edge="end"
             sx={{ ml: 2 }}
-            href='https://github.com'
+            href='https://github.com/aleoli/gpt-pwa'
             target='_blank'
             rel='noreferrer'
           >

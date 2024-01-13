@@ -41,7 +41,7 @@ function LeftMenu() {
         component="nav"
       >
         <ListItemButton alignItems="flex-start" onClick={() => {
-          navigate('/');
+          navigate(process.env.PUBLIC_URL + '/');
           leftMenuCtx?.setOpen(false);
         }}>
           <ListItemIcon>
@@ -50,7 +50,7 @@ function LeftMenu() {
           <ListItemText primary="Chat" />
         </ListItemButton>
         <ListItemButton alignItems="flex-start" onClick={() => {
-          navigate('/image');
+          navigate(process.env.PUBLIC_URL + '/image');
           leftMenuCtx?.setOpen(false);
         }}>
           <ListItemIcon>
@@ -59,7 +59,7 @@ function LeftMenu() {
           <ListItemText primary="Image Generation" />
         </ListItemButton>
         <ListItemButton alignItems="flex-start" onClick={() => {
-          navigate('/settings');
+          navigate(process.env.PUBLIC_URL + '/settings');
           leftMenuCtx?.setOpen(false);
         }}>
           <ListItemIcon>

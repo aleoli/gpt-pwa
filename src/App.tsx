@@ -28,7 +28,7 @@ function App() {
         <LeftMenuContext.Provider value={leftMenuCtxValue}>
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Layout />}>
+              <Route path="/gpt-pwa" element={<Layout />}>
                 <Route index element={<Chat />} />
                 <Route path="chat" element={<Chat />} />
                 <Route path="image" element={<ImageGeneration />} />

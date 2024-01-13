@@ -1,6 +1,7 @@
 import { AppBar, IconButton, TextareaAutosize, Toolbar, alpha, styled } from "@mui/material";
 import React from "react";
 import SendIcon from '@mui/icons-material/Send';
+import { isPWA, isiOS } from "./TopBar";
 
 const Write = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -10,6 +11,7 @@ const Write = styled('div')(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(TextareaAutosize)(({ theme }) => ({
+  fontSize: '1rem',
   color: 'inherit',
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   borderRadius: theme.shape.borderRadius,
@@ -45,14 +47,24 @@ export interface WriteBarProps {
   onWrite?: (text: string) => void;
 }
 
+export const iOSPWABottomPadding = 35;
+export const iOSPWABottomBarHeight = 56;
+
 function WriteBar(props: WriteBarProps) {
   const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
+
+  const paddingBottomNumber = isPWA() && isiOS() ? iOSPWABottomPadding : 0;
+  const paddingBottom = paddingBottomNumber + 'px';
 
   const [text, setText] = React.useState<string | null>(null);
 
   return (
     <React.Fragment>
-      <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
+      <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }} style={
+        {
+          paddingBottom,
+        }
+      }>
         <Toolbar>
           <Write onChange={(event) => {
             setText((event.target as HTMLTextAreaElement).value);
@@ -72,7 +84,11 @@ function WriteBar(props: WriteBarProps) {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Offset />
+      <Offset style={
+        {
+          height: paddingBottomNumber > 0 ? (paddingBottomNumber+iOSPWABottomBarHeight)+'px' : undefined,
+        }
+      }/>
     </React.Fragment>
   );
 }
