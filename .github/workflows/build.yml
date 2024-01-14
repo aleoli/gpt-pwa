@@ -5,6 +5,8 @@ permissions:
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -19,6 +21,7 @@ jobs:
       run: |
         mkdir -p docs
         mv build/* docs/
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
@@ -28,3 +31,4 @@ jobs:
         clean: true
         single-commit: true
         force: true
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
