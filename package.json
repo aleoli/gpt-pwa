@@ -13,7 +13,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^29.5.11",
     "@types/node": "^17.0.45",
-    "@types/react": "^18.2.47",
+    "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "openai": "^4.24.7",
     "react": "^18.2.0",
